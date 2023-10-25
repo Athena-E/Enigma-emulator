@@ -1,0 +1,76 @@
+#Offset operation
+#move each letter of substitution alphabet forwards the number of places A is from the offset letter (e.g. if B is the offset letter, A is 25 places forwards from B. So E would become D)
+#cipher letter is directly below the plaintext letter moved forward by the number of places the offset letter is from A (e.g. if B is the offset letter, B is 1 place forwards from A. If the plaintext letter entered is C, it is treated as a D and encoded as E)
+#NB rotor 3 is always advanced before a letter is encrypted (e.g. if the rotor start position is AAA, the actual configuration is AAB when the first letter is entered)
+
+pos = AAB
+ring setting = AAA
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+DJLEKFCPUYMSNVXGWTROZHAQBI(1)
+JLEKFCPUYMSNVXGWTROZHAQBID
+
+pos = AAC
+ring setting = AAA
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+DJLEKFCPUYMSNVXGWTROZHAQBI(1)
+CIKDJEBOTXLRMUWFVSQNYGZPAH(2)
+KDJEBOTXLRMUWFVSQNYGZPAHCI
+
+pos = AAD
+ring setting = AAA
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+DJLEKFCPUYMSNVXGWTROZHAQBI(1)
+CIKDJEBOTXLRMUWFVSQNYGZPAH(2)
+BHJCIDANSWKQLTVEURPMXFYOZG(3)
+CIDANSWKQLTVEURPMXFYOZGBHJ
+
+#Ringstellung operation
+#find the dot position of the offset letter; its position in the substitution alphabet counting from 0-25 (e.g. dot pos of A = 20)
+#get the number of places the ring setting is from the offset and add to the dot position (e.g. if A is the offset, C is two places away from A so the new dot position is 22)
+#move each letter of substitution alphabet forwards the number of places ring setting letter is away from offset letter (e.g. C is two places away from A. So E would become G)
+#shift the entire new cipher alphabet forwards until the ring setting letter is in the dot position calculated before
+
+pos = AAA
+ring setting = AAC
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+dot pos A = 20
+new pos C = 20+1+1 = 22
+FLNGMHERWAOUPXZIYVTQBJCSDK(1)
+GMOHNIFSXBPVQYAJZWURCKDTEL(2)
+ELGMOHNIFSXBPVQYAJZWURCKDT(forwards 2)
+
+pos = AAB
+ring setting = AAC
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+dot pos B = 22
+new pos C = 22+1=23
+FLNGMHERWAOUPXZIYVTQBJCSDK(1)
+KFLNGMHERWAOUPXZIYVTQBJCSD(forwards 1)
+
+pos = AAC
+ring setting = AAC
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+dot pos C = 24
+new pos C = 24
+EKMFLGDQVZNTOWYHXUSPAIBRCJ
+
+pos = AAD
+ring setting = AAC
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+EKMFLGDQVZNTOWYHXUSPAIBRCJ(sub)
+dot pos D = 6
+new pos C = 6+25 = 31 --> 5
+DJLEKFCPUYMSNVXGWTROZHAQBI
+JLEKFCPUYMSNVXGWTROZHAQBID
+
+
+
+
+
+
