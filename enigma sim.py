@@ -500,7 +500,7 @@ while True:
             screen.fill(black)
             pg.display.flip()
         else:
-            print("hello")
+            print("Plugboard button event")
         plugboard_button.show = not plugboard_button.show
 
 
